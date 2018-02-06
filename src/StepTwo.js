@@ -8,7 +8,7 @@ class StepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant : '',
+      restaurant : 'default',
       res: null,
       formValid: false
     };
@@ -37,16 +37,20 @@ class StepTwo extends Component {
     console.log("LOOK HERE STATE", this.state)
   }
 
+  // seperate function to save values
   saveInput(event) {
     const data = {
-      restaurant: this.restaurant
-    } 
+      restaurant: this.state.restaurant
+    }
+    console.log("inside save input", this.restaurant)
     this.props.saveValues(data)
+    this.props.nextStep()
   }
 
 
 
   render() {
+    // here it is fine 
     console.log("in render", this.state)
     // number can get negative
     // form required fields
@@ -96,7 +100,7 @@ class StepTwo extends Component {
           </select>
         <br />
         <button onClick={ this.previousStep }>previous</button>
-        <button onClick={ this.nextStep, this.saveInput} disabled={!this.state.formValid}>Save and Continue</button>
+        <button onClick={ this.saveInput } disabled={!this.state.formValid}>Save and Continue</button>
       </form>
     );
   }

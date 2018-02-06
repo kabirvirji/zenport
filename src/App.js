@@ -55,7 +55,7 @@ class App extends Component {
           nextStep={nextStep}
         />
       case 2:
-        return <StepTwo 
+        return <StepTwo
           saveValues={saveValues}
           nextStep={nextStep}
           previousStep={previousStep}
