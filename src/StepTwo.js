@@ -8,14 +8,13 @@ class StepOne extends Component {
     super(props);
     this.state = {
       mealTime: 'breakfast',
-      numberOfGuests: 0,
+      numberOfGuests: 1,
       formErrors: {guests: ''},
       validNumber: false,
       formValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.nextStep = this.nextStep.bind(this);
   }
 
   // valids field and sets state accordingly
@@ -34,7 +33,7 @@ class StepOne extends Component {
 
   // checks to see if whole form is valid
   validateForm() {
-    this.setState({formValid: this.state.validNumber});
+    this.setState({formValid: this.state.numberOfGuestsValid});
   }
 
   // does form validation on any change
@@ -48,15 +47,6 @@ class StepOne extends Component {
       [name]: value},
       () => { this.validateField(name, value) 
     });
-  }
-
-  nextStep(event) {
-    const data = {
-      mealTime: this.state.mealTime,
-      numberOfGuests: this.state.numberOfGuests
-    }
-
-    console.log(this.props)
   }
 
   render() {
@@ -75,7 +65,7 @@ class StepOne extends Component {
           </select>
         <br />
         <label>
-          Number of guests:
+          LALALALALAALALLALA
           <input
             name="numberOfGuests"
             type="number"
@@ -84,7 +74,7 @@ class StepOne extends Component {
             onChange={this.handleInputChange} />
         </label>
         <FormErrors formErrors={this.state.formErrors} />
-        <button onClick={ this.nextStep } disabled={!this.state.formValid}>Save and Continue</button>
+        <button onClick={ this.nextStep }>Save and Continue</button>
       </form>
     );
   }
