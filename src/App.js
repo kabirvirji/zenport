@@ -36,12 +36,18 @@ class App extends Component {
       })
     }
 
+    const saveValues = (x) => {
+      this.setState({
+        fieldValues: x
+      })
+    }
+
     console.log(this.state)
 
     switch (this.state.step) {
       case 1:
         return <StepOne 
-          fieldValues={this.state.fieldValues}
+          saveValues={saveValues}
           nextStep={nextStep}
         />
       case 2:

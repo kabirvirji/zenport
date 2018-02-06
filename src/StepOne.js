@@ -55,7 +55,8 @@ class StepOne extends Component {
       mealTime: this.state.mealTime,
       numberOfGuests: this.state.numberOfGuests
     }
-
+    console.log(data)
+    this.props.saveValues(data)
     console.log("this props", this.props.nextStep())
   }
 
