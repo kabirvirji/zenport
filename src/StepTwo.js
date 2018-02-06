@@ -54,13 +54,31 @@ class StepTwo extends Component {
     }
     // result contains the id's of the dishes to display in the drop down
     console.log("result", result)
+    // need to loop through again and find the restaurant name based on id
+    let res = []
+    for (let j = 0; j < data.dishes.length; j++) {
+      for (let k = 0; k < result.length; k++) {
+        if (data.dishes[j].id === result[k]){
+          res.push(data.dishes[j].restaurant)
+        }
+      }
+    }
+    // remove duplicates
+    function uniq(a) {
+        var seen = {};
+        return a.filter(function(item) {
+            return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+        });
+    }
+    res = uniq(res)
+
 
     return (
       <form>
           <select
             name="restaurant"
-            onChange={this.handleInputChange} >
-              {data.dishes.map(element => <option value={element.restaurant}>{element.restaurant}</option>)}
+            onChange={this.handleInputChange}>
+              {res.map(element => <option value={element}>{element}</option>)}
           </select>
         <br />
         <button onClick={ this.previousStep }>previous</button>
