@@ -13,6 +13,7 @@ class StepTwo extends Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    console.log("CONSTRUCTOR PROPS", this.props)
     //this.filterData = this.filterData.bind(this);
   };
 
@@ -35,22 +36,31 @@ class StepTwo extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log("in render", this.props)
     // number can get negative
     // form required fields
     // no previous step for this form
     const meal = this.props.previousValues.mealTime
-    const filteredRestaurants = data.filter(i => meal in i.availableMeals)
-    console.log("FILTERED", filteredRestaurants)
+    let result = []
+    console.log(data)
+    let dishes = data.dishes
+    for (let dish = 0; dish < data.dishes.length; dish++) {
+      for (let i = 0; i < dishes[dish].availableMeals.length; i++) {
+        console.log(dishes[dish].availableMeals[i])
+        if (dishes[dish].availableMeals[i] === meal) {
+          result.push(dishes[dish].id)
+        }
+      }
+    }
+    // result contains the id's of the dishes to display in the drop down
+    console.log("result", result)
 
     return (
       <form>
           <select
             name="restaurant"
             onChange={this.handleInputChange} >
-
-            <option value="Mcdondalds">Mcdondalds</option>
-            <option value="coco curry">coco</option>
+              {data.dishes.map(element => <option value={element.restaurant}>{element.restaurant}</option>)}
           </select>
         <br />
         <button onClick={ this.previousStep }>previous</button>
