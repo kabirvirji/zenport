@@ -9,10 +9,12 @@ class StepTwo extends Component {
     super(props);
     this.state = {
       restaurant : '',
+      res: null,
       formValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.saveInput = this.saveInput.bind(this);
     console.log("CONSTRUCTOR PROPS", this.props)
     //this.filterData = this.filterData.bind(this);
   };
@@ -28,34 +30,43 @@ class StepTwo extends Component {
         formValid: true
       }
     );
-    this.props.saveValues(this.restaurant, value)
-    // console.log(this.state.restaurant)
-    // if (this.state.restaurant !== '') {
-    //   this.setState({formValid: true});
-    // }
+    // const data = {
+    //   restaurant: this.restaurant
+    // } 
+    // this.props.saveValues(data)
+    console.log("LOOK HERE STATE", this.state)
   }
 
+  saveInput(event) {
+    const data = {
+      restaurant: this.restaurant
+    } 
+    this.props.saveValues(data)
+  }
+
+
+
   render() {
-    console.log("in render", this.props)
+    console.log("in render", this.state)
     // number can get negative
     // form required fields
     // no previous step for this form
     const meal = this.props.previousValues.mealTime
     let result = []
-    console.log(data)
+    let res = [1, 2, 3]
     let dishes = data.dishes
     for (let dish = 0; dish < data.dishes.length; dish++) {
       for (let i = 0; i < dishes[dish].availableMeals.length; i++) {
-        console.log(dishes[dish].availableMeals[i])
         if (dishes[dish].availableMeals[i] === meal) {
           result.push(dishes[dish].id)
+          res.push(dishes[dish].restaurant)
         }
       }
     }
     // result contains the id's of the dishes to display in the drop down
-    console.log("result", result)
+
     // need to loop through again and find the restaurant name based on id
-    let res = []
+    
     for (let j = 0; j < data.dishes.length; j++) {
       for (let k = 0; k < result.length; k++) {
         if (data.dishes[j].id === result[k]){
@@ -70,11 +81,14 @@ class StepTwo extends Component {
             return seen.hasOwnProperty(item) ? false : (seen[item] = true);
         });
     }
-    res = uniq(res)
-
-
+    res.unshift('--')
+    res = uniq(res);
+    // need to store res in local state, and use this.state.res for the dropdown
+    // can do it at once dont need to go thru again
+    // {res.map(element => <option value={element}>{element}</option>)}
     return (
       <form>
+
           <select
             name="restaurant"
             onChange={this.handleInputChange}>
@@ -82,7 +96,7 @@ class StepTwo extends Component {
           </select>
         <br />
         <button onClick={ this.previousStep }>previous</button>
-        <button onClick={ this.nextStep } disabled={!this.state.formValid}>Save and Continue</button>
+        <button onClick={ this.nextStep, this.saveInput} disabled={!this.state.formValid}>Save and Continue</button>
       </form>
     );
   }
