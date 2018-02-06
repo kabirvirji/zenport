@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { FormErrors } from './FormErrors'
 
 class StepOne extends Component {
 
@@ -7,12 +8,35 @@ class StepOne extends Component {
     super(props);
     this.state = {
       mealTime: 'breakfast',
-      numberOfGuests: 1
+      numberOfGuests: 1,
+      formErrors: {guests: ''},
+      validNumber: false,
+      formValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  // valids field and sets state accordingly
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let numberOfGuestsValid = this.state.validNumber;
+
+    if (fieldName === 'numberOfGuests') {
+        numberOfGuestsValid = value <= 10;
+        fieldValidationErrors.guests = numberOfGuestsValid ? '': 'maximum 10';
+    }
+    this.setState({formErrors: fieldValidationErrors,
+                    validNumber: numberOfGuestsValid
+                  }, this.validateForm);
+  }
+
+  // checks to see if whole form is valid
+  validateForm() {
+    this.setState({formValid: this.state.numberOfGuestsValid});
+  }
+
+  // does form validation on any change
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -20,7 +44,8 @@ class StepOne extends Component {
     console.log(name)
     console.log(value)
     this.setState({
-      [name]: value
+      [name]: value},
+      () => { this.validateField(name, value) 
     });
   }
 
@@ -43,9 +68,11 @@ class StepOne extends Component {
           <input
             name="numberOfGuests"
             type="number"
+            min="0"
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange} />
         </label>
+        <FormErrors formErrors={this.state.formErrors} />
       </form>
     );
   }
