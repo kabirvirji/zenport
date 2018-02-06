@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { FormErrors } from './FormErrors'
 
-class StepOne extends Component {
+class StepTwo extends Component {
 
   constructor(props) {
     super(props);
@@ -80,4 +80,4 @@ class StepOne extends Component {
   }
 }
 
-export default StepOne;
+export default StepTwo;

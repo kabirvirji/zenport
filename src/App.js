@@ -40,7 +40,10 @@ class App extends Component {
 
     switch (this.state.step) {
       case 1:
-        return <StepOne />
+        return <StepOne 
+          fieldValues={this.state.fieldValues}
+          nextStep={nextStep}
+        />
       case 2:
         return <StepTwo />
     }

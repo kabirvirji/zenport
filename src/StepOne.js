@@ -56,7 +56,7 @@ class StepOne extends Component {
       numberOfGuests: this.state.numberOfGuests
     }
 
-    console.log(this.props)
+    console.log("this props", this.props.nextStep())
   }
 
   render() {
