@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import StepOne from './StepOne'
 import StepTwo from './StepTwo'
+import StepThree from './StepThree'
 
 class App extends Component {
 
@@ -37,13 +38,15 @@ class App extends Component {
       })
     }
 
-    const saveValues = (x) => {
+    // can do a loop here instead of calling more than once elsewhere
+    const saveValues = (obj) => {
       this.setState({
-        fieldValues: x
+        fieldValues: {...obj}
       })
+      console.log("App.js state", this.state)
     }
 
-    console.log(this.state)
+    
 
     switch (this.state.step) {
       case 1:
@@ -53,6 +56,13 @@ class App extends Component {
         />
       case 2:
         return <StepTwo 
+          saveValues={saveValues}
+          nextStep={nextStep}
+          previousStep={previousStep}
+          previousValues={this.state.fieldValues}
+        />
+      case 3:
+        return <StepThree
           saveValues={saveValues}
           nextStep={nextStep}
           previousStep={previousStep}
