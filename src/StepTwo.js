@@ -1,39 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import { FormErrors } from './FormErrors'
+import data from './data/dishes.json' 
 
 class StepTwo extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      mealTime: 'breakfast',
-      numberOfGuests: 1,
-      formErrors: {guests: ''},
-      validNumber: false,
+      restaurant : '',
       formValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  // valids field and sets state accordingly
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let numberOfGuestsValid = this.state.validNumber;
-
-    if (fieldName === 'numberOfGuests') {
-        numberOfGuestsValid = value <= 10;
-        fieldValidationErrors.guests = numberOfGuestsValid ? '': 'maximum 10';
-    }
-    this.setState({formErrors: fieldValidationErrors,
-                    validNumber: numberOfGuestsValid
-                  }, this.validateForm);
-  }
-
-  // checks to see if whole form is valid
-  validateForm() {
-    this.setState({formValid: this.state.numberOfGuestsValid});
   }
 
   // does form validation on any change
@@ -41,12 +20,17 @@ class StepTwo extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(name)
-    console.log(value)
+    console.log("name", name)
+    console.log("value", value)
     this.setState({
-      [name]: value},
-      () => { this.validateField(name, value) 
-    });
+        [name]: value,
+        formValid: true
+      }
+    );
+    // console.log(this.state.restaurant)
+    // if (this.state.restaurant !== '') {
+    //   this.setState({formValid: true});
+    // }
   }
 
   render() {
@@ -57,24 +41,14 @@ class StepTwo extends Component {
     return (
       <form>
           <select
-            name="mealTime"
+            name="restaurant"
             onChange={this.handleInputChange} >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">lunch</option>
-            <option value="dinner">dinner</option>
+            <option value="Mcdondalds">Mcdondalds</option>
+            <option value="coco curry">coco curry</option>
           </select>
         <br />
-        <label>
-          LALALALALAALALLALA
-          <input
-            name="numberOfGuests"
-            type="number"
-            min="0"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        </label>
-        <FormErrors formErrors={this.state.formErrors} />
-        <button onClick={ this.nextStep }>Save and Continue</button>
+        <button onClick={ this.previousStep }>previous</button>
+        <button onClick={ this.nextStep } disabled={!this.state.formValid}>Save and Continue</button>
       </form>
     );
   }

@@ -12,7 +12,8 @@ class App extends Component {
       step: 1,
       fieldValues : {
         mealTime: null,
-        numberOfGuests: null
+        numberOfGuests: null,
+        restaurant: null
       }
     }
   };
@@ -51,7 +52,12 @@ class App extends Component {
           nextStep={nextStep}
         />
       case 2:
-        return <StepTwo />
+        return <StepTwo 
+          saveValues={saveValues}
+          nextStep={nextStep}
+          previousStep={previousStep}
+          previousValues={this.state.fieldValues}
+        />
     }
 
   }
