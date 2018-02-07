@@ -36,7 +36,7 @@ class App extends Component {
       this.setState((prevState) => ({
         step : prevState.step - 1
       }), () => console.log("after previous step", this.state))
-    } // put nre state here to chec
+    } 
 
     // can do a loop here instead of calling more than once elsewhere
     const saveValues = (obj) => {
