@@ -6,12 +6,16 @@ class StepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      meals: [], // going to be array of key value pairs {meal:serving}
+      meals: {}, // going to be key value pairs {meal:serving, meal:serving}
       currentMeal: null,
-      currentServing: null
+      currentServing: null,
+      totalDishes: 0,
+      validNumber: false
     };
+    // this.handleInputChange = this.handleInputChange.bind(this);
+    // this.saveInput = this.saveInput.bind(this);
+    //this.addItem = this.saveItem.bind(this);
   }
-
 
   render() {
 
@@ -23,12 +27,9 @@ class StepThree extends Component {
 
     // initilize this.state.meals because we already know which meals are allowed 
     for (let i = 0; i < availableMeals.length; i++) {
-      let temp = {}
-      temp[availableMeals[i].name] = null
-      this.state.meals.push(temp)
+      this.state.meals[availableMeals[i].name] = null
     }
     console.log(this.state.meals)
-    // [ {Steak: null}, {Piman: null} ]
 
     return (
       <form>
@@ -44,6 +45,11 @@ class StepThree extends Component {
           value={this.state.servings}
           onChange={this.handleInputChange} 
         />
+        <h3>Please enter more than {this.props.previousValues.numberOfGuests} meals</h3>
+        <h3>Current total meal(s) : {this.state.totalDishes}</h3>
+        <button onClick={ this.addItem }>add item</button>
+        <button onClick={ this.props.previousStep }>previous</button>
+        <button onClick={ this.saveInput } disabled={!this.state.validNumber}>Save and Continue</button>
       </form>
     );
   }

@@ -26,17 +26,17 @@ class App extends Component {
     // if not handle the errors
 
     const nextStep = () => {
-      this.setState({
-        step : this.state.step + 1
-      })
+      this.setState((prevState) => ({
+        step : prevState.step + 1
+      }), () => console.log("after next step", this.state))
     }
 
     // Same as nextStep, but decrementing
     const previousStep = () => {
-      this.setState({
-        step : this.state.step - 1
-      })
-    }
+      this.setState((prevState) => ({
+        step : prevState.step - 1
+      }), () => console.log("after previous step", this.state))
+    } // put nre state here to chec
 
     // can do a loop here instead of calling more than once elsewhere
     const saveValues = (obj) => {
