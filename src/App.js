@@ -40,10 +40,10 @@ class App extends Component {
 
     // can do a loop here instead of calling more than once elsewhere
     const saveValues = (obj) => {
-      this.setState({
-        fieldValues: {...obj}
-      })
-      console.log("App.js state", this.state)
+      this.setState((prevState) => ({
+        fieldValues: {...prevState.fieldValues, ...obj} 
+      }), () => console.log("new state", this.state))
+      
     }
 
     
