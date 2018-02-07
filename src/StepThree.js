@@ -14,7 +14,7 @@ class StepThree extends Component {
     };
     this.handleInputMeal = this.handleInputMeal.bind(this);
     this.handleInputServing = this.handleInputServing.bind(this);
-    // this.saveInput = this.saveInput.bind(this);
+    this.saveInput = this.saveInput.bind(this);
     this.addItem = this.addItem.bind(this);
   }
 
@@ -43,24 +43,21 @@ class StepThree extends Component {
   }
 
   addItem(event) {
-    console.log(this.state.currentMeal)
-    console.log(this.state.currentServing)
     event.preventDefault();
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: prevState.currentServing},
       validNumber: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? true : false
     }))
-    
-    // if dishes enough
-    // if (this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) {
-    //   this.setState({
-    //     validNumber: true
-    //   })
-    // }
   }
 
-  // when add, see if it is valid number
+  saveInput(event) {
+    const data = {
+      meals: this.state.meals
+    }
+    this.props.saveValues(data)
+    this.props.nextStep()
+  }
 
   render() {
     console.log("in render", this.state)

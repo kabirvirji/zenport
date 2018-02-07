@@ -4,6 +4,7 @@ import './App.css';
 import StepOne from './StepOne'
 import StepTwo from './StepTwo'
 import StepThree from './StepThree'
+import StepFour from './StepFour'
 
 class App extends Component {
 
@@ -14,7 +15,8 @@ class App extends Component {
       fieldValues : {
         mealTime: null,
         numberOfGuests: null,
-        restaurant: null
+        restaurant: null,
+        meals: null
       }
     }
   };
@@ -63,6 +65,13 @@ class App extends Component {
         />
       case 3:
         return <StepThree
+          saveValues={saveValues}
+          nextStep={nextStep}
+          previousStep={previousStep}
+          previousValues={this.state.fieldValues}
+        />
+      case 4:
+        return <StepFour
           saveValues={saveValues}
           nextStep={nextStep}
           previousStep={previousStep}
