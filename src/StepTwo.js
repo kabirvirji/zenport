@@ -50,6 +50,8 @@ class StepTwo extends Component {
 
 
   render() {
+  const test = this.props.previousValues
+  console.log("test", test)
     // here it is fine 
     console.log("in render", this.state)
     // number can get negative
