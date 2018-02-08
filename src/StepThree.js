@@ -14,39 +14,31 @@ class StepThree extends Component {
       errorMsg: 'Please enter more meals',
       mealServing: false
     };
-    this.handleInputMeal = this.handleInputMeal.bind(this);
-    this.handleInputServing = this.handleInputServing.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.saveInput = this.saveInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.addItemReveal = this.addItemReveal.bind(this);
   }
 
-  handleInputMeal(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  handleInput(event) {
+    const {name, value} = event.target
     this.setState({
         [name]: value,
       }
     );
   }
 
-  handleInputServing(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-        [name]: value,
-      }
-    );
-  }
+  // add 2, and then add 4. total is 6, good. but meals {} is still at 4
+  // need to change how meals is dealt with here
+  // also simpler than this expression? 
+  // errorMsg has the big expressions too since it relies on valid number
 
   addItem(event) {
     event.preventDefault();
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: prevState.currentServing},
-      validNumber: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? true : false,
+      validNumber: (+prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests),
       errorMsg: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? '' : 'Please enter more meals',
     }))
   }
@@ -55,7 +47,7 @@ class StepThree extends Component {
     event.preventDefault();
     console.log(this.state)
     this.setState((prevState) => ({
-      mealServing: (prevState.currentMeal !== null && prevState.currentServing !== null) ? true : false
+      mealServing: (prevState.currentMeal !== null && prevState.currentServing !== null)
     }))
   }
 
@@ -75,7 +67,7 @@ class StepThree extends Component {
       <form>
         <select
           name="currentMeal"
-          onChange={event => { this.handleInputMeal(event); this.addItemReveal(event)}}
+          onChange={event => { this.handleInput(event); this.addItemReveal(event)}}
         >
           {availableMeals.map(element => <option value={element.name} key={`${element.name}_${element}`}>{element.name}</option>)}
         </select>
@@ -84,7 +76,7 @@ class StepThree extends Component {
           type="number"
           min="1"
           value={this.state.servings}
-          onChange={event => {this.handleInputMeal(event); this.addItemReveal(event)}} 
+          onChange={event => {this.handleInput(event); this.addItemReveal(event)}} 
         />
         <h3>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h3>
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
