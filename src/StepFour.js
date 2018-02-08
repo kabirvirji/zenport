@@ -8,8 +8,8 @@ class StepFour extends Component {
 
   render() {
 
-    const allMeals = this.props.previousValues.meals // object
-    const guests = this.props.previousValues.numberOfGuests // number
+    const allMeals = this.props.previousValues.meals 
+    const guests = this.props.previousValues.numberOfGuests 
     const restaurant = this.props.previousValues.restaurant
     const mealTime = this.props.previousValues.mealTime
 

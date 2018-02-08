@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FormErrors } from './FormErrors'
 
 class StepOne extends Component {
 
@@ -8,43 +7,19 @@ class StepOne extends Component {
     this.state = {
       mealTime: 'breakfast',
       numberOfGuests: '',
-      formErrors: {guests: ''},
-      validNumber: false,
-      formValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.nextStep = this.nextStep.bind(this);
   }
 
-  // valids field and sets state accordingly
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let numberOfGuestsValid = this.state.validNumber;
-
-    if (fieldName === 'numberOfGuests') {
-        numberOfGuestsValid = (value <= 10 && value >= 1);
-        fieldValidationErrors.guests = numberOfGuestsValid ? '': 'maximum 10';
-    }
-    this.setState({formErrors: fieldValidationErrors,
-                    validNumber: numberOfGuestsValid
-                  }, this.validateForm);
-  }
-
-  // checks to see if whole form is valid
-  validateForm() {
-    this.setState({formValid: this.state.validNumber});
-  }
-
-  // does form validation on any change
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
     this.setState({
-      [name]: value},
-      () => { this.validateField(name, value) 
-    });
+      [name]: value}
+    );
   }
 
   nextStep(event) {
@@ -76,8 +51,8 @@ class StepOne extends Component {
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange} />
         </label>
-        <FormErrors formErrors={this.state.formErrors} />
-        <button onClick={ this.nextStep } disabled={!this.state.formValid}>Save and Continue</button>
+        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests != '') ? <h2>10 guests maximum</h2> : <h2>valid guests</h2>}
+        <button onClick={ this.nextStep } disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests != '')}>Save and Continue</button>
       </form>
     );
   }
