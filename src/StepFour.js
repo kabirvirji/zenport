@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-import { FormErrors } from './FormErrors'
-import data from './data/dishes.json' 
 
 class StepFour extends Component {
 

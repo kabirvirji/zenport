@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import StepOne from './StepOne'
 import StepTwo from './StepTwo'
@@ -66,7 +65,12 @@ class App extends Component {
           saveValues={saveValues}
           nextStep={nextStep}
           previousStep={previousStep}
-          previousValues={this.state.fieldValues}
+          previousValues={this.state.fieldValues} 
+        />
+      default:
+        return <StepOne 
+          saveValues={saveValues}
+          nextStep={nextStep}
         />
     }
 

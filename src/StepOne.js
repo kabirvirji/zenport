@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { FormErrors } from './FormErrors'
 
 class StepOne extends Component {
@@ -8,7 +7,7 @@ class StepOne extends Component {
     super(props);
     this.state = {
       mealTime: 'breakfast',
-      numberOfGuests: 0,
+      numberOfGuests: '',
       formErrors: {guests: ''},
       validNumber: false,
       formValid: false
@@ -24,7 +23,7 @@ class StepOne extends Component {
     let numberOfGuestsValid = this.state.validNumber;
 
     if (fieldName === 'numberOfGuests') {
-        numberOfGuestsValid = value <= 10;
+        numberOfGuestsValid = (value <= 10 && value >= 1);
         fieldValidationErrors.guests = numberOfGuestsValid ? '': 'maximum 10';
     }
     this.setState({formErrors: fieldValidationErrors,
@@ -69,11 +68,11 @@ class StepOne extends Component {
           </select>
         <br />
         <label>
-          Number of guests:
+          Enter 1 or more guests:
           <input
             name="numberOfGuests"
             type="number"
-            min="0"
+            min="1"
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange} />
         </label>

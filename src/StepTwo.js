@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { FormErrors } from './FormErrors'
 import data from './data/dishes.json' 
 
 class StepTwo extends Component {
@@ -37,41 +36,13 @@ class StepTwo extends Component {
   }
 
   render() {
+
     const meal = this.props.previousValues.mealTime
-    let result = []
-    let res = []
-    let dishes = data.dishes
-    for (let dish = 0; dish < data.dishes.length; dish++) {
-      for (let i = 0; i < dishes[dish].availableMeals.length; i++) {
-        if (dishes[dish].availableMeals[i] === meal) {
-          result.push(dishes[dish].id)
-          res.push(dishes[dish].restaurant)
-        }
-      }
-    }
+    let result = data.dishes.filter(dish => dish.availableMeals.some(m => m === meal)).map(dish => dish.id)
+    let res = data.dishes.filter(dish => result.some(result => dish.id === result)).map(d => d.restaurant)
+    res = Array.from(new Set(res)) // remove duplicates
+    res.unshift('--') // add default for dropdown
 
-    // result contains the id's of the dishes to display in the drop down
-
-    // need to loop through again and find the restaurant name based on id
-    
-    for (let j = 0; j < data.dishes.length; j++) {
-      for (let k = 0; k < result.length; k++) {
-        if (data.dishes[j].id === result[k]){
-          res.push(data.dishes[j].restaurant)
-        }
-      }
-    }
-    // remove duplicates
-    function uniq(a) {
-        var seen = {};
-        return a.filter(function(item) {
-            return seen.hasOwnProperty(item) ? false : (seen[item] = true);
-        });
-    }
-    res.unshift('--')
-    res = uniq(res);
-
-    // {res.map(element => <option value={element}>{element}</option>)}
     return (
       <form>
           <select

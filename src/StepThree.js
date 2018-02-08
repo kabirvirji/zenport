@@ -10,12 +10,15 @@ class StepThree extends Component {
       currentMeal: null,
       currentServing: null,
       totalDishes: 0,
-      validNumber: false
+      validNumber: false,
+      errorMsg: 'Please enter more meals',
+      mealServing: false
     };
     this.handleInputMeal = this.handleInputMeal.bind(this);
     this.handleInputServing = this.handleInputServing.bind(this);
     this.saveInput = this.saveInput.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.addItemReveal = this.addItemReveal.bind(this);
   }
 
   handleInputMeal(event) {
@@ -43,7 +46,16 @@ class StepThree extends Component {
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: prevState.currentServing},
-      validNumber: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? true : false
+      validNumber: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? true : false,
+      errorMsg: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? '' : 'Please enter more meals',
+    }))
+  }
+
+  addItemReveal(event) {
+    event.preventDefault();
+    console.log(this.state)
+    this.setState((prevState) => ({
+      mealServing: (prevState.currentMeal !== null && prevState.currentServing !== null) ? true : false
     }))
   }
 
@@ -63,21 +75,22 @@ class StepThree extends Component {
       <form>
         <select
           name="currentMeal"
-          onChange={this.handleInputMeal}
+          onChange={event => { this.handleInputMeal(event); this.addItemReveal(event)}}
         >
-          {availableMeals.map(element => <option value={element.name} key={element.name + element.name}>{element.name}</option>)}
+          {availableMeals.map(element => <option value={element.name} key={`${element.name}_${element}`}>{element.name}</option>)}
         </select>
         <input
           name="currentServing"
           type="number"
           min="1"
           value={this.state.servings}
-          onChange={this.handleInputServing} 
+          onChange={event => {this.handleInputMeal(event); this.addItemReveal(event)}} 
         />
         <h3>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h3>
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
         
-        <button onClick={ this.addItem }>add item</button>
+        <h2>{this.state.errorMsg}</h2>
+        <button onClick={ this.addItem } disabled={!this.state.mealServing}>add item</button>
         <button onClick={ this.props.previousStep }>previous</button>
         <button onClick={ this.saveInput } disabled={!this.state.validNumber}>Save and Continue</button>
       </form>
