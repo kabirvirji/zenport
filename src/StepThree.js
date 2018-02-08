@@ -10,9 +10,7 @@ class StepThree extends Component {
       currentMeal: null,
       currentServing: null,
       totalDishes: 0,
-      validNumber: false,
       errorMsg: 'Please enter more meals',
-      mealServing: false
     };
     this.handleInput = this.handleInput.bind(this);
     this.saveInput = this.saveInput.bind(this);
@@ -35,12 +33,14 @@ class StepThree extends Component {
 
   //addNumbers(num1, num2) // because JavaScript is weird
 
+
+
   addItem(event) {
     event.preventDefault();
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
-      validNumber: (+prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests),
+      
       errorMsg: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? '' : 'Please enter more meals',
     }))
   }
@@ -65,6 +65,7 @@ class StepThree extends Component {
     const availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
     availableMeals.unshift('--')
     // <h2>Ordered: {availableMeals.map(i => <p>{i}, {this.state.meals.i}</p>)}</h2>
+    //         <h2>{() => !(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? 'Please enter more meals' : ''}</h2>
     return (
       <form>
         <select
@@ -82,11 +83,10 @@ class StepThree extends Component {
         />
         <h3>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h3>
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
-        
-        <h2>{this.state.errorMsg}</h2>
-        <button onClick={ this.addItem } disabled={!this.state.mealServing}>add item</button>
+        {!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? <h2>Please enter more meals</h2> : <h2>Enough meals</h2>}
+        <button onClick={ this.addItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
         <button onClick={ this.props.previousStep }>previous</button>
-        <button onClick={ this.saveInput } disabled={!this.state.validNumber}>Save and Continue</button>
+        <button onClick={ this.saveInput } disabled={!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests)}>Save and Continue</button>
       </form>
     );
   }
