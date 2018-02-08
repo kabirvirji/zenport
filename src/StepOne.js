@@ -42,8 +42,6 @@ class StepOne extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(name)
-    console.log(value)
     this.setState({
       [name]: value},
       () => { this.validateField(name, value) 
@@ -55,16 +53,11 @@ class StepOne extends Component {
       mealTime: this.state.mealTime,
       numberOfGuests: this.state.numberOfGuests
     }
-    console.log(data)
     this.props.saveValues(data)
-    console.log("this props", this.props.nextStep())
+    this.props.nextStep()
   }
 
   render() {
-    console.log(this.state)
-    // number can get negative
-    // form required fields
-    // no previous step for this form
     return (
       <form>
           <select

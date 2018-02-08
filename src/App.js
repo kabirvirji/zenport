@@ -22,33 +22,24 @@ class App extends Component {
   };
 
   render() {
-    // return a specific form based on current step
-    // when user clicks next, calls forms validate function to check for valid input
-    // if it is valid you increment next step
-    // if not handle the errors
 
     const nextStep = () => {
       this.setState((prevState) => ({
         step : prevState.step + 1
-      }), () => console.log("after next step", this.state))
+      }))
     }
 
-    // Same as nextStep, but decrementing
     const previousStep = () => {
       this.setState((prevState) => ({
         step : prevState.step - 1
-      }), () => console.log("after previous step", this.state))
+      }))
     } 
 
-    // can do a loop here instead of calling more than once elsewhere
     const saveValues = (obj) => {
       this.setState((prevState) => ({
         fieldValues: {...prevState.fieldValues, ...obj} 
-      }), () => console.log("new state", this.state))
-      
+      }))
     }
-
-    
 
     switch (this.state.step) {
       case 1:

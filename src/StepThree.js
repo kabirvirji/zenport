@@ -22,8 +22,6 @@ class StepThree extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log("name", name)
-    console.log("value", value)
     this.setState({
         [name]: value,
       }
@@ -34,8 +32,6 @@ class StepThree extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log("name", name)
-    console.log("value", value)
     this.setState({
         [name]: value,
       }
@@ -60,24 +56,9 @@ class StepThree extends Component {
   }
 
   render() {
-    console.log("in render", this.state)
-    const test = this.props.previousValues
-    console.log("test", test)
-    // passes restaurant but lost other values
     const availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
-    console.log(availableMeals)
     availableMeals.unshift('--')
-
-    // initilize this.state.meals because we already know which meals are allowed 
-    // for (let i = 0; i < availableMeals.length; i++) {
-    //   this.state.meals[availableMeals[i].name] = null
-    // }
-    // console.log(this.state.meals)
-
-    // {[this.state.meals].map(i => {i, this.state.meals[i]})}
-    // <h2>Ordered: {availableMeals.map(i => <p>{i, this.state.meals.i}</p>)}</h2>
-    // const mealsArr = [this.state.meals].entries()
-    // console.log(mealsArr)
+    // <h2>Ordered: {availableMeals.map(i => <p>{i}, {this.state.meals.i}</p>)}</h2>
     return (
       <form>
         <select

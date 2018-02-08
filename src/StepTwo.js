@@ -23,43 +23,24 @@ class StepTwo extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log("name", name)
-    console.log("value", value)
     this.setState({
         [name]: value,
         formValid: true
       }
     );
-    // const data = {
-    //   restaurant: this.restaurant
-    // } 
-    // this.props.saveValues(data)
-    console.log("LOOK HERE STATE", this.state)
   }
 
-  // seperate function to save values
   saveInput(event) {
     const data = {
       restaurant: this.state.restaurant
     }
-    console.log("inside save input", this.restaurant)
     this.props.saveValues(data)
     this.props.nextStep()
   }
 
-
-
   render() {
-  const test = this.props.previousValues
-  console.log("test", test)
-    // here it is fine 
-    console.log("in render", this.state)
-    // number can get negative
-    // form required fields
-    // no previous step for this form
     const meal = this.props.previousValues.mealTime
     let result = []
-    let res = [1, 2, 3]
     let dishes = data.dishes
     for (let dish = 0; dish < data.dishes.length; dish++) {
       for (let i = 0; i < dishes[dish].availableMeals.length; i++) {
@@ -69,6 +50,7 @@ class StepTwo extends Component {
         }
       }
     }
+
     // result contains the id's of the dishes to display in the drop down
 
     // need to loop through again and find the restaurant name based on id
@@ -89,12 +71,10 @@ class StepTwo extends Component {
     }
     res.unshift('--')
     res = uniq(res);
-    // need to store res in local state, and use this.state.res for the dropdown
-    // can do it at once dont need to go thru again
+
     // {res.map(element => <option value={element}>{element}</option>)}
     return (
       <form>
-
           <select
             name="restaurant"
             onChange={this.handleInputChange}>
