@@ -33,11 +33,13 @@ class StepThree extends Component {
   // also simpler than this expression? 
   // errorMsg has the big expressions too since it relies on valid number
 
+  //addNumbers(num1, num2) // because JavaScript is weird
+
   addItem(event) {
     event.preventDefault();
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
-      meals: {...prevState.meals, [prevState.currentMeal]: prevState.currentServing},
+      meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
       validNumber: (+prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests),
       errorMsg: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? '' : 'Please enter more meals',
     }))
