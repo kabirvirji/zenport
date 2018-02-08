@@ -6,7 +6,7 @@ class StepOne extends Component {
     super(props);
     this.state = {
       mealTime: 'breakfast',
-      numberOfGuests: '',
+      numberOfGuests: 0,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,8 +51,8 @@ class StepOne extends Component {
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange} />
         </label>
-        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests != '') ? <h2>10 guests maximum</h2> : <h2>valid guests</h2>}
-        <button onClick={ this.nextStep } disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests != '')}>Save and Continue</button>
+        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== '') ? <h2>10 guests maximum</h2> : <h2>valid guests</h2>}
+        <button onClick={ this.nextStep } disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== 0)}>Save and Continue</button>
       </form>
     );
   }

@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "jest-cli": "^22.2.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-scripts": "1.1.0"
   },
   "scripts": {
@@ -12,5 +13,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.2.1",
+    "react-test-renderer": "^15.6.2"
   }
 }
