@@ -65,7 +65,7 @@ class StepThree extends Component {
           name="currentMeal"
           onChange={this.handleInputMeal}
         >
-          {availableMeals.map(element => <option value={element.name}>{element.name}</option>)}
+          {availableMeals.map(element => <option value={element.name} key={element.name + element.name}>{element.name}</option>)}
         </select>
         <input
           name="currentServing"

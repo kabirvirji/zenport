@@ -19,7 +19,7 @@ class StepFour extends Component {
     return (
 
       <div>
-        Meals: {Object.keys(allMeals).map(k => <p>{k}, {allMeals[k]}</p>)}
+        Meals: {Object.keys(allMeals).map(k => <p key={k}>{k}, {allMeals[k]}</p>)}
         <br />
         Guests: {guests}
         <br />

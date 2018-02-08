@@ -15,8 +15,6 @@ class StepTwo extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.saveInput = this.saveInput.bind(this);
-    console.log("CONSTRUCTOR PROPS", this.props)
-    //this.filterData = this.filterData.bind(this);
   };
 
   handleInputChange(event) {
@@ -41,6 +39,7 @@ class StepTwo extends Component {
   render() {
     const meal = this.props.previousValues.mealTime
     let result = []
+    let res = []
     let dishes = data.dishes
     for (let dish = 0; dish < data.dishes.length; dish++) {
       for (let i = 0; i < dishes[dish].availableMeals.length; i++) {
@@ -78,7 +77,7 @@ class StepTwo extends Component {
           <select
             name="restaurant"
             onChange={this.handleInputChange}>
-              {res.map(element => <option value={element}>{element}</option>)}
+              {res.map(element => <option value={element} key={element}>{element}</option>)}
           </select>
         <br />
         <button onClick={ this.props.previousStep }>previous</button>
