@@ -19,14 +19,17 @@ class StepFour extends Component {
     return (
 
       <div>
-        {JSON.stringify(allMeals)}
+        Meals: {Object.keys(allMeals).map(k => <p>{k}, {allMeals[k]}</p>)}
         <br />
-        {guests}
+        Guests: {guests}
         <br />
-        {restaurant}
+        restaurant: {restaurant}
         <br />
-        {mealTime}
-        <button onClick={ this.display }>previous</button>
+        mealtime: {mealTime}
+        <br />
+        <button onClick={ this.props.previousStep }>previous</button>
+        <br />
+        <button onClick={ this.display }>submit</button>
       </div>
 
     );
