@@ -10,7 +10,6 @@ class StepThree extends Component {
       currentMeal: null,
       currentServing: null,
       totalDishes: 0,
-      errorMsg: 'Please enter more meals',
     };
     this.handleInput = this.handleInput.bind(this);
     this.saveInput = this.saveInput.bind(this);
@@ -26,30 +25,11 @@ class StepThree extends Component {
     );
   }
 
-  // add 2, and then add 4. total is 6, good. but meals {} is still at 4
-  // need to change how meals is dealt with here
-  // also simpler than this expression? 
-  // errorMsg has the big expressions too since it relies on valid number
-
-  //addNumbers(num1, num2) // because JavaScript is weird
-
-
-
   addItem(event) {
     event.preventDefault();
     this.setState((prevState) => ({
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
-      
-      errorMsg: +prevState.totalDishes + +this.state.currentServing <= 10 && +prevState.totalDishes + +this.state.currentServing >= this.props.previousValues.numberOfGuests ? '' : 'Please enter more meals',
-    }))
-  }
-
-  addItemReveal(event) {
-    event.preventDefault();
-    console.log(this.state)
-    this.setState((prevState) => ({
-      mealServing: (prevState.currentMeal !== null && prevState.currentServing !== null)
     }))
   }
 
@@ -64,8 +44,6 @@ class StepThree extends Component {
   render() {
     const availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
     availableMeals.unshift('--')
-    // <h2>Ordered: {availableMeals.map(i => <p>{i}, {this.state.meals.i}</p>)}</h2>
-    //         <h2>{() => !(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? 'Please enter more meals' : ''}</h2>
     return (
       <form>
         <select
