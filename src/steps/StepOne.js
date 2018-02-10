@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/StepOne.css';
 
 class StepOne extends Component {
 
@@ -33,7 +34,7 @@ class StepOne extends Component {
 
   render() {
     return (
-      <form>
+      <form className={"form"}>
           <select
             name="mealTime"
             onChange={this.handleInputChange} >

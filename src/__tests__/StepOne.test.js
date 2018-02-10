@@ -2,6 +2,7 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import React from 'react'
 import StepOne from './StepOne'
+import sinon from 'sinon'
 import { shallow, mount } from 'enzyme'
 
 configure({ adapter: new Adapter() });
@@ -21,3 +22,17 @@ it('button should be disabled if number of guests is greater than 10', () => {
     const Button = wrapper.find('button').at(0)
     expect(Button.props().disabled).toEqual(true)    
 })
+
+it('thing', () => {
+    const spy = sinon.spy();
+
+    const instance = shallow(<StepOne saveValue={spy}/>);
+
+    const wrapper = shallow(<StepOne />)
+    const input = wrapper.find('input')
+    input.simulate('change', 11)
+    const Button = wrapper.find('button').at(0)
+    expect(Button.props().disabled).toEqual(true) 
+
+    //expect(spy.calledWith(...correct save value))
+});

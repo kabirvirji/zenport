@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from './data/dishes.json' 
+import data from '../data/dishes.json' 
 
 class StepThree extends Component {
 
@@ -14,6 +14,7 @@ class StepThree extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.saveInput = this.saveInput.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleInput(event) {
@@ -30,6 +31,22 @@ class StepThree extends Component {
       totalDishes: +prevState.totalDishes + +this.state.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
     }))
+    console.log("add", this.state)
+  }
+
+  // deleting 10 of an item that was never in the cart still deletes from total dishes
+
+  // when try to remove something that doesn't exist from cart it might add it to array and be empty
+  // need to update current, 
+
+  // if prevState.meals.currentMeal is not undefined then do subtraction or do nothing
+  deleteItem(event) {
+    event.preventDefault();
+    this.setState((prevState) => ({
+      totalDishes: prevState.meals[prevState.currentMeal] > 0 ? Math.max(+prevState.totalDishes - +this.state.currentServing, prevState.totalDishes) : prevState.totalDishes,
+      meals: {...prevState.meals, (prevState.meals.currentMeal ? ([prevState.meals.currentMeal]: Math.max((+prevState.meals[prevState.currentMeal] || 0)) - +prevState.currentServing, 0))}
+    }))
+    console.log("delete", this.state)
   }
 
   saveInput(event) {
@@ -58,10 +75,10 @@ class StepThree extends Component {
           value={this.state.servings}
           onChange={this.handleInput} 
         />
-        <h3>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h3>
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
-        {!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? <h2>Please enter more meals</h2> : <h2>Enough meals</h2>}
+        {!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? <h2>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h2> : <h2>Enough meals</h2>}
         <button onClick={ this.addItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
+        <button onClick={ this.deleteItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>delete item</button>
         <button onClick={ this.props.previousStep }>previous</button>
         <button onClick={ this.saveInput } disabled={!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests)}>Save and Continue</button>
       </form>

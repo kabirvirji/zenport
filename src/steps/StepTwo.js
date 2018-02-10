@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import data from './data/dishes.json' 
+import data from '../data/dishes.json' 
 
 class StepTwo extends Component {
 
@@ -8,8 +7,7 @@ class StepTwo extends Component {
     super(props);
     this.state = {
       restaurant : 'default',
-      res: null,
-      formValid: false
+      res: null
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -22,7 +20,6 @@ class StepTwo extends Component {
     const name = target.name;
     this.setState({
         [name]: value,
-        formValid: true
       }
     );
   }
@@ -52,7 +49,7 @@ class StepTwo extends Component {
           </select>
         <br />
         <button onClick={ this.props.previousStep }>previous</button>
-        <button onClick={ this.saveInput } disabled={!this.state.formValid}>Save and Continue</button>
+        <button onClick={ this.saveInput } disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
       </form>
     );
   }

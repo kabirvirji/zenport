@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import StepOne from './StepOne'
-import StepTwo from './StepTwo'
-import StepThree from './StepThree'
-import StepFour from './StepFour'
+import StepOne from './steps/StepOne'
+import StepTwo from './steps/StepTwo'
+import StepThree from './steps/StepThree'
+import StepFour from './steps/StepFour'
 
 class App extends Component {
 
