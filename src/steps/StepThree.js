@@ -8,7 +8,7 @@ class StepThree extends Component {
     this.state = {
       meals: {}, 
       currentMeal: null,
-      currentServing: null,
+      currentServing: 0,
       totalDishes: 0,
     };
     this.handleInput = this.handleInput.bind(this);
@@ -28,25 +28,21 @@ class StepThree extends Component {
   addItem(event) {
     event.preventDefault();
     this.setState((prevState) => ({
-      totalDishes: +prevState.totalDishes + +this.state.currentServing,
+      totalDishes: +prevState.totalDishes + +prevState.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
     }))
     console.log("add", this.state)
   }
 
-  // deleting 10 of an item that was never in the cart still deletes from total dishes
-
-  // when try to remove something that doesn't exist from cart it might add it to array and be empty
-  // need to update current, 
-
-  // if prevState.meals.currentMeal is not undefined then do subtraction or do nothing
   deleteItem(event) {
     event.preventDefault();
-    this.setState((prevState) => ({
-      totalDishes: prevState.meals[prevState.currentMeal] > 0 ? Math.max(+prevState.totalDishes - +this.state.currentServing, prevState.totalDishes) : prevState.totalDishes,
-      meals: {...prevState.meals, (prevState.meals.currentMeal ? ([prevState.meals.currentMeal]: Math.max((+prevState.meals[prevState.currentMeal] || 0)) - +prevState.currentServing, 0))}
-    }))
-    console.log("delete", this.state)
+    if (this.state.meals.hasOwnProperty(this.state.currentMeal)) {
+      let value = Math.max(+this.state.meals[this.state.currentMeal] - +this.state.currentServing, 0)
+      this.setState((prevState) => ({
+        totalDishes: Math.max(+prevState.totalDishes - +prevState.currentServing, 0),
+        meals: {...prevState.meals, [prevState.currentMeal]: value}
+      }))
+    }
   }
 
   saveInput(event) {
