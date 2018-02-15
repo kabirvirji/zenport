@@ -38,7 +38,7 @@ class StepTwo extends Component {
     let result = data.dishes.filter(dish => dish.availableMeals.some(m => m === meal)).map(dish => dish.id)
     let res = data.dishes.filter(dish => result.some(result => dish.id === result)).map(d => d.restaurant)
     res = Array.from(new Set(res)) // remove duplicates
-    res.unshift('--') // add default for dropdown
+    res.unshift('--') // add visual default for dropdown
 
     return (
       <form>

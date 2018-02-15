@@ -39,3 +39,11 @@ it('dinner restaurants', () => {
         <option>Olive Garden</option>
         ])).toEqual(true)
 })
+
+it('button should not be disabled if any value other than default is chosen', () => {
+    const wrapper = shallow(<StepTwo previousValues={{mealTime: 'dinner'}}/>)
+    const input = wrapper.find('select')
+    input.simulate('change', {target: {name: "restaurant", value: 'Mc Donalds' }})
+    const Button = wrapper.find('button').at(1)
+    expect(Button.props().disabled).toEqual(false) 
+})
