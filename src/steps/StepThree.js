@@ -36,14 +36,13 @@ class StepThree extends Component {
   deleteItem(event) {
     event.preventDefault();
     if (this.state.meals.hasOwnProperty(this.state.currentMeal)) {
-      let value = Math.max(+this.state.meals[this.state.currentMeal] - +this.state.currentServing, 0)
+      const maxDelete = this.state.meals[this.state.currentMeal] // quantity of that item in cart
+      const value = Math.max(+this.state.meals[this.state.currentMeal] - +this.state.currentServing, 0)
       this.setState((prevState) => ({
-        totalDishes: Math.max(+prevState.totalDishes - +prevState.currentServing, 0),
+        totalDishes: Math.max(prevState.totalDishes - prevState.currentServing, prevState.totalDishes - maxDelete),
         meals: {...prevState.meals, [prevState.currentMeal]: value}
       }))
     }
-
-
   }
 
   saveInput(event) {
@@ -54,12 +53,8 @@ class StepThree extends Component {
     this.props.nextStep()
   }
 
-  // need to make the meals view a scroll view since when you add lots it keeps moving everything down
-
-  // warning for pizzeria since two items with the same name
-
   render() {
-    let availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
+    let availableMeals = data.dishes.filter(o => (o.restaurant === this.props.previousValues.restaurant && o.availableMeals.indexOf(this.props.previousValues.mealTime) !== -1))
     availableMeals.unshift('--')
     return (
       <form>

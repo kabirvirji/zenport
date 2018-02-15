@@ -7,12 +7,8 @@ import { shallow, configure } from 'enzyme'
 configure({ adapter: new Adapter() });
 
 it('correct dropdown', () => {
-    const wrapper = shallow(<StepThree previousValues={{restaurant: 'Mc Donalds'}}/>)
+    const wrapper = shallow(<StepThree previousValues={{restaurant: 'Mc Donalds', mealTime: 'breakfast'}}/>)
     expect(wrapper.containsAllMatchingElements([
-        <option>Chicken Burger</option>,
-        <option>Ham Burger</option>,
-        <option>Cheese Burger</option>,
-        <option>Fries</option>,
         <option>Egg Muffin</option>
         ])).toEqual(true)
 })
@@ -34,8 +30,7 @@ it('delete meal', () => {
     const select = wrapper.find('select')
     const input = wrapper.find('input')
     const Button = wrapper.find('button').at(1)
-    wrapper.setState({meals: {'Cheese Burger': 3, 'Ham Burger': 2}})
-    wrapper.setState({totalDishes: 5})
+    wrapper.setState({meals: {'Cheese Burger': 3, 'Ham Burger': 2}, totalDishes: 5})
     select.simulate('change', {target: {name: "currentMeal", value: "Cheese Burger" }})
     input.simulate('change', {target: {name: "currentServing", value: 3 }})
     Button.simulate('click', {preventDefault: () => {}})
