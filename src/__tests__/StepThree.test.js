@@ -2,7 +2,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import React from 'react'
 import StepThree from '../steps/StepThree'
 import sinon from 'sinon'
-import { shallow, mount, configure } from 'enzyme'
+import { shallow, configure } from 'enzyme'
 
 configure({ adapter: new Adapter() });
 

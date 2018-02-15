@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+import './Main.css';
 import StepOne from './steps/StepOne'
 import StepTwo from './steps/StepTwo'
 import StepThree from './steps/StepThree'
 import StepFour from './steps/StepFour'
 
-class App extends Component {
+class Main extends Component {
 
   constructor(props) {
     super(props);
@@ -77,4 +77,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Main;
