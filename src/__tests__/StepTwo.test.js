@@ -1,7 +1,6 @@
 import Adapter from 'enzyme-adapter-react-15';
 import React from 'react'
 import StepTwo from '../steps/StepTwo'
-import sinon from 'sinon'
 import { shallow, mount, configure } from 'enzyme'
 
 configure({ adapter: new Adapter() });
@@ -40,10 +39,10 @@ it('dinner restaurants', () => {
         ])).toEqual(true)
 })
 
-it('button should not be disabled if any value other than default is chosen', () => {
+it('button should be disabled if default is chosen', () => {
     const wrapper = shallow(<StepTwo previousValues={{mealTime: 'dinner'}}/>)
     const input = wrapper.find('select')
-    input.simulate('change', {target: {name: "restaurant", value: 'Mc Donalds' }})
+    input.simulate('change', {target: {name: "restaurant", value: 'default' }})
     const Button = wrapper.find('button').at(1)
-    expect(Button.props().disabled).toEqual(false) 
+    expect(Button.props().disabled).toEqual(true) 
 })

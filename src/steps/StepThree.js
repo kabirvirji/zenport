@@ -31,7 +31,6 @@ class StepThree extends Component {
       totalDishes: +prevState.totalDishes + +prevState.currentServing,
       meals: {...prevState.meals, [prevState.currentMeal]: (+prevState.meals[prevState.currentMeal] || 0) + +prevState.currentServing},
     }))
-    console.log("add", this.state)
   }
 
   deleteItem(event) {
@@ -57,8 +56,10 @@ class StepThree extends Component {
 
   // need to make the meals view a scroll view since when you add lots it keeps moving everything down
 
+  // warning for pizzeria since two items with the same name
+
   render() {
-    const availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
+    let availableMeals = data.dishes.filter(o => o.restaurant === this.props.previousValues.restaurant)
     availableMeals.unshift('--')
     return (
       <form>
@@ -77,7 +78,7 @@ class StepThree extends Component {
         />
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
         {!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? <h2>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h2> : <h2>Enough meals</h2>}
-        Current Meals: {Object.keys(this.state.meals).map(m => <p key={m}>{m}, {this.state.meals[m]}</p>)}
+        Current Meals: {Object.keys(this.state.meals).map(m => <p key={m}>{m} x {this.state.meals[m]}</p>)}
         <button onClick={ this.addItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
         <button onClick={ this.deleteItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>delete item</button>
         <button onClick={ this.props.previousStep }>previous</button>
