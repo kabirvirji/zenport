@@ -79,10 +79,10 @@ class StepThree extends Component {
         <h3>Current total number of meal(s) : {this.state.totalDishes}</h3>
         {!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests) ? <h2>Please enter between {this.props.previousValues.numberOfGuests} and 10 meals (inclusive)</h2> : <h2>Enough meals</h2>}
         Current Meals: {Object.keys(this.state.meals).map(m => <p key={m}>{m} x {this.state.meals[m]}</p>)}
-        <button onClick={ this.addItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
-        <button onClick={ this.deleteItem } disabled={!(this.state.currentMeal && this.state.currentServing)}>delete item</button>
-        <button onClick={ this.props.previousStep }>previous</button>
-        <button onClick={ this.saveInput } disabled={!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests)}>Save and Continue</button>
+        <button onClick={this.addItem} disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
+        <button onClick={this.deleteItem} disabled={!(this.state.currentMeal && this.state.currentServing)}>delete item</button>
+        <button onClick={this.props.previousStep}>previous</button>
+        <button onClick={this.saveInput} disabled={!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests)}>Save and Continue</button>
       </form>
     );
   }

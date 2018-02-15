@@ -46,8 +46,8 @@ class StepTwo extends Component {
               {res.map(element => <option value={element} key={element}>{element}</option>)}
           </select>
         <br />
-        <button onClick={ this.props.previousStep }>previous</button>
-        <button onClick={ this.saveInput } disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
+        <button onClick={this.props.previousStep}>previous</button>
+        <button onClick={this.saveInput} disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
       </form>
     );
   }
