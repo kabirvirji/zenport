@@ -39,14 +39,15 @@ class StepOne extends Component {
         </label>
           <select
             name="mealTime"
+            className={"input"}
             onChange={this.handleInputChange} >
             <option value="breakfast">Breakfast</option>
             <option value="lunch">Lunch</option>
             <option value="dinner">Dinner</option>
           </select>
-        <br />
+        <br /><br />
         <label className={"label"}>
-          Number of guests:
+          Number of Guests:
         </label>
           <input
             className={"input"}
@@ -55,8 +56,8 @@ class StepOne extends Component {
             min="1"
             value={this.state.numberOfGuests}
             onChange={this.handleInputChange} />
-        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== '') ? <h2>10 guests maximum</h2> : <h2>number of guests valid</h2>}
-        <button onClick={this.nextStep} disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== 0)}>Save and Continue</button>
+        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== '') ? <h2 className={"error"}>10 guests maximum</h2> : <h2 className={"valid"}>number of guests valid</h2>}
+        <button className={"button"} onClick={this.nextStep} disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== 0)}>Save and Continue</button>
       </form>
     );
   }

@@ -10,5 +10,18 @@
 }
 
 .input {
-  text-align: center;
+  padding: 12px 20px;
+  font-size: 24px;
+}
+
+.button {
+  font-size: 24px;
+}
+
+.error {
+  color: red;
+}
+
+.valid {
+  color: green;
 }

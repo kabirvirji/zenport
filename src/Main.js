@@ -39,7 +39,7 @@ class Main extends Component {
         fieldValues: {...prevState.fieldValues, ...obj} 
       }))
     }
-
+  
     switch (this.state.step) {
       case 1:
         return <StepOne 
