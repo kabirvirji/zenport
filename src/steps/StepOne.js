@@ -32,33 +32,35 @@ class StepOne extends Component {
 
   render() {
     return (
-      <form className={"form"}>
-        <h1>Step 1</h1>
-        <label className={"label"}>
-          Meal Time:
-        </label>
-          <select
-            name="mealTime"
-            className={"input"}
-            onChange={this.handleInputChange} >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
-        <br /><br />
-        <label className={"label"}>
-          Number of Guests:
-        </label>
-          <input
-            className={"input"}
-            name="numberOfGuests"
-            type="number"
-            min="1"
-            value={this.state.numberOfGuests}
-            onChange={this.handleInputChange} />
-        {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== '') ? <h2 className={"error"}>10 guests maximum</h2> : <h2 className={"valid"}>number of guests valid</h2>}
-        <button className={"button"} onClick={this.nextStep} disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== 0)}>Save and Continue</button>
-      </form>
+      <div className={"stepOne"}>
+        <form className={"form"}>
+          <h1>Step 1</h1>
+          <label className={"label"}>
+            Meal Time:
+          </label>
+            <select
+              name="mealTime"
+              className={"input"}
+              onChange={this.handleInputChange} >
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+          <br /><br />
+          <label className={"label"}>
+            Number of Guests:
+          </label>
+            <input
+              className={"input"}
+              name="numberOfGuests"
+              type="number"
+              min="1"
+              value={this.state.numberOfGuests}
+              onChange={this.handleInputChange} />
+          {!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== '') ? <h2 className={"error"}>10 guests maximum</h2> : <h2 className={"valid"}>number of guests valid</h2>}
+          <button className={"button"} onClick={this.nextStep} disabled={!(this.state.numberOfGuests <= 10 && this.state.numberOfGuests !== 0)}>Save and Continue</button>
+        </form>
+      </div>
     );
   }
 }

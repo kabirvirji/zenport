@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import data from '../data/dishes.json' 
+import data from '../data/dishes.json'
+import '../styles/StepTwo.css';
 
 class StepTwo extends Component {
 
@@ -39,16 +40,23 @@ class StepTwo extends Component {
     res.unshift('--') // add visual default for dropdown
 
     return (
-      <form>
-          <select
-            name="restaurant"
-            onChange={this.handleInputChange}>
-              {res.map(element => <option value={element} key={element}>{element}</option>)}
-          </select>
-        <br />
-        <button onClick={this.props.previousStep}>previous</button>
-        <button onClick={this.saveInput} disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
-      </form>
+      <div className={"stepTwo"}>
+        <form className={"form"}>
+            <h1>Step 2</h1>
+          <label className={"label"}>
+            Please select a restaurant:
+          </label>
+            <select
+              name="restaurant"
+              className={"input"}
+              onChange={this.handleInputChange}>
+                {res.map(element => <option value={element} key={element}>{element}</option>)}
+            </select>
+          <br /><br />
+          <button className={"button"} onClick={this.props.previousStep}>Previous</button>
+          <button className={"button"} onClick={this.saveInput} disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
+        </form>
+      </div>
     );
   }
 }

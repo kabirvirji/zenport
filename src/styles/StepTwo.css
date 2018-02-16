@@ -1,27 +1,28 @@
-.stepOne .form {
+.stepTwo .form {
   text-align: center;
   padding: 20px;
 }
 
-.stepOne .label {
+.stepTwo .label {
   text-align: center;
   font-size: 24px;
   padding-right: 10px; 
 }
 
-.stepOne .input {
+.stepTwo .input {
   padding: 12px 20px;
   font-size: 24px;
 }
 
-.stepOne .button {
+.stepTwo .button {
   font-size: 24px;
+  margin-right: 10px;
 }
 
-.stepOne .error {
+.stepTwo .error {
   color: red;
 }
 
-.stepOne .valid {
+.stepTwo .valid {
   color: green;
 }
