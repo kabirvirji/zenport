@@ -90,7 +90,7 @@ class StepThree extends Component {
             {Object.keys(this.state.meals).map(m => <p className={"meal"} key={m}>{m} x {this.state.meals[m]}</p>)}
           </div>
           <br /><br />
-          <button className={"button"} onClick={this.props.previousStep}>previous</button>
+          <button className={"button"} onClick={this.props.previousStep}>Previous</button>
           <button className={"button"} onClick={this.addItem} disabled={!(this.state.currentMeal && this.state.currentServing)}>add item</button>
           <button className={"button"} onClick={this.deleteItem} disabled={!(this.state.currentMeal && this.state.currentServing)}>delete item</button>
           <button className={"button"} onClick={this.saveInput} disabled={!(this.state.totalDishes <= 10 && this.state.totalDishes >= this.props.previousValues.numberOfGuests)}>Save and Continue</button>

@@ -29,7 +29,7 @@ class StepFour extends Component {
         <div className={"mealsContainer"}>
           {Object.keys(allMeals).map(k => <p className={"meal"} key={k}>{k} x {allMeals[k]}</p>)}
         </div>
-        <button className={"button"} onClick={ this.props.previousStep }>previous</button>
+        <button className={"button"} onClick={ this.props.previousStep }>Previous</button>
         <br />
         <button className={"button"} onClick={ this.display }>submit</button>
       </div>
