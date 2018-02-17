@@ -18,11 +18,3 @@
   font-size: 24px;
   margin-right: 10px;
 }
-
-.stepTwo .error {
-  color: red;
-}
-
-.stepTwo .valid {
-  color: green;
-}

@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import data from '../data/dishes.json'
-import '../styles/StepTwo.css';
+import '../styles/StepTwo.css'
 
 class StepTwo extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       restaurant : 'default',
       res: null
-    };
+    }
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.saveInput = this.saveInput.bind(this);
-  };
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.saveInput = this.saveInput.bind(this)
+  }
 
   handleInputChange(event) {
     const {name, value} = event.target
     this.setState({
         [name]: value,
       }
-    );
+    )
   }
 
   saveInput(event) {
@@ -42,9 +42,9 @@ class StepTwo extends Component {
     return (
       <div className={"stepTwo"}>
         <form className={"form"}>
-            <h1>Step 2</h1>
+          <h1>Step 2</h1>
           <label className={"label"}>
-            Please select a restaurant:
+            Please Select a Restaurant:
           </label>
             <select
               name="restaurant"
@@ -57,8 +57,8 @@ class StepTwo extends Component {
           <button className={"button"} onClick={this.saveInput} disabled={!(this.state.restaurant !== 'default')}>Save and Continue</button>
         </form>
       </div>
-    );
+    )
   }
 }
 
-export default StepTwo;
+export default StepTwo

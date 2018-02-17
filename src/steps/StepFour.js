@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import '../styles/StepFour.css'
 
 class StepFour extends Component {
 
@@ -15,22 +16,26 @@ class StepFour extends Component {
 
     return (
 
-      <div>
-        Meals: {Object.keys(allMeals).map(k => <p key={k}>{k} x {allMeals[k]}</p>)}
+      <div className={"stepFour"}>
+        <h2>Review</h2>
         <br />
-        Guests: {guests}
+        <p className={"item"}>Meal: {mealTime}</p>
         <br />
-        restaurant: {restaurant}
+        <p className={"item"}>No. of People: {guests}</p>
         <br />
-        mealtime: {mealTime}
+        <p className={"item"}>Restaurant: {restaurant}</p>
         <br />
-        <button onClick={ this.props.previousStep }>previous</button>
+        <p className={"item"}>Dishes:</p> 
+        <div className={"mealsContainer"}>
+          {Object.keys(allMeals).map(k => <p className={"meal"} key={k}>{k} x {allMeals[k]}</p>)}
+        </div>
+        <button className={"button"} onClick={ this.props.previousStep }>previous</button>
         <br />
-        <button onClick={ this.display }>submit</button>
+        <button className={"button"} onClick={ this.display }>submit</button>
       </div>
 
-    );
+    )
   }
 }
 
-export default StepFour;
+export default StepFour

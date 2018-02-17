@@ -1,0 +1,40 @@
+.stepThree .form {
+  text-align: center;
+  padding: 20px;
+}
+
+.stepThree .label {
+  text-align: center;
+  font-size: 24px;
+  padding-right: 10px; 
+}
+
+.stepThree .input {
+  padding: 12px 20px;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.stepThree .button {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.stepThree .error {
+  color: red;
+}
+
+.stepThree .valid {
+  color: green;
+}
+
+.stepThree .mealsContainer {
+  height: 150px;
+  overflow: auto;
+}
+
+.stepThree .meal {
+  font-size: 20px;
+}
+
+

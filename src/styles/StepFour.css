@@ -1,0 +1,21 @@
+.stepFour {
+  text-align: center;
+  padding: 20px;
+}
+
+.stepFour .button {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.stepFour .mealsContainer {
+  height: 150px;
+  overflow: auto;
+}
+
+.stepFour .item {
+  font-size: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
